@@ -24,9 +24,12 @@ import {
   Instagram,
   Linkedin,
   Mail,
-  Phone
+  Phone,
+  MessageCircle,
+  Send,
+  Loader2
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FOOTER_CONTENT } from "./content";
 
 // --- Components ---
@@ -737,6 +740,122 @@ const Footer = ({ onOpenPage }: { onOpenPage: (id: string) => void }) => {
 
 // --- Main App ---
 
+const ChatSupport = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = { role: "user", content: input };
+    setMessages(prev => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+      
+      setMessages(prev => [...prev, { role: "assistant", content: data.message }]);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I'm having trouble connecting. Please try again later." }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-[60]">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="absolute bottom-16 right-0 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col"
+          >
+            <div className="bg-navy-deep p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-safety-orange rounded-full flex items-center justify-center text-white">
+                  <Shield size={16} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white uppercase tracking-widest">Astrateq Support</p>
+                  <p className="text-[10px] text-white/60">AI Assistant • Online</p>
+                </div>
+              </div>
+              <button onClick={() => setIsOpen(false)} className="text-white/60 hover:text-white transition-colors">
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="flex-1 h-80 overflow-y-auto p-4 space-y-4 bg-warm-bg-start">
+              {messages.length === 0 && (
+                <div className="text-center space-y-2 py-4">
+                  <p className="text-sm font-bold text-navy-deep">How can we help you today?</p>
+                  <p className="text-xs text-navy-deep/60">Ask about our products, safety standards, or installation.</p>
+                </div>
+              )}
+              {messages.map((msg, i) => (
+                <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                  <div className={`max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${
+                    msg.role === "user" 
+                      ? "bg-safety-orange text-white rounded-tr-none" 
+                      : "bg-white text-navy-deep shadow-sm border border-gray-100 rounded-tl-none"
+                  }`}>
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100">
+                    <Loader2 size={16} className="animate-spin text-safety-orange" />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <form onSubmit={handleSend} className="p-4 bg-white border-t border-gray-100 flex gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your message..."
+                className="flex-1 bg-gray-50 border border-gray-100 rounded-lg px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-safety-orange/20 transition-all"
+              />
+              <button 
+                type="submit" 
+                disabled={isLoading}
+                className="bg-navy-deep text-white p-2 rounded-lg hover:bg-navy-deep/90 transition-all disabled:opacity-50"
+              >
+                <Send size={16} />
+              </button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-14 h-14 bg-safety-orange text-white rounded-full shadow-lg shadow-safety-orange/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all group"
+      >
+        {isOpen ? <X size={24} /> : <MessageCircle size={24} className="group-hover:rotate-12 transition-transform" />}
+      </button>
+    </div>
+  );
+};
+
 export default function App() {
   const [activePage, setActivePage] = useState<string | null>(null);
 
@@ -804,6 +923,8 @@ export default function App() {
         onClose={() => setActivePage(null)} 
         pageId={activePage} 
       />
+
+      <ChatSupport />
     </div>
   );
 }
