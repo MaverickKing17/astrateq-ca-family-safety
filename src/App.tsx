@@ -206,9 +206,9 @@ const Hero = () => {
         >
           <div className="relative rounded-2xl overflow-hidden shadow-card border border-gray-100 bg-white p-2">
             <img 
-              src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=1000" 
-              alt="Modern Automotive Safety Interface" 
-              className="w-full h-[400px] object-cover rounded-xl"
+              src="https://i.ibb.co/1JnHxCLH/Create-a-beautiful-202604141604.jpg" 
+              alt="Astrateq Safety Visual" 
+              className="w-full h-auto rounded-xl"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/40 to-transparent pointer-events-none" />
@@ -369,6 +369,7 @@ const Pricing = () => {
       price: "329", 
       tag: "MOST POPULAR", 
       best: "BEST FOR: FAMILIES WITH AGING PARENTS",
+      image: "https://i.ibb.co/M56sVkSh/Image-fx-5.jpg",
       features: ["Real-time driving behaviour analysis", "Predictive maintenance alerts 3-6 weeks ahead", "Guardian Mode with family dashboard", "OBD-II plug-and-play • 5 min setup"]
     },
     { 
@@ -376,6 +377,7 @@ const Pricing = () => {
       price: "449", 
       tag: "ADVANCED", 
       best: "BEST FOR: FREQUENT DRIVERS & FLEET MANAGERS",
+      image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1000",
       features: ["Fleet-wide predictive maintenance", "Multi-vehicle Guardian Mode", "Driver fatigue detection", "Priority support access"]
     },
     { 
@@ -383,6 +385,7 @@ const Pricing = () => {
       price: "379", 
       tag: "BEST FOR: ELECTRIC VEHICLE OWNERS", 
       best: "BEST FOR: ELECTRIC VEHICLE OWNERS",
+      image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1000",
       features: ["Battery degradation forecasting", "Range anxiety early alerts", "OBD-II + EV API sync", "Charge cycle optimisation"]
     },
   ];
@@ -412,7 +415,19 @@ const Pricing = () => {
               transition={{ delay: i * 0.1 }}
               className={`p-8 rounded-lg shadow-card border ${i === 0 ? "bg-white text-navy-deep border-safety-orange border-2" : "bg-white border-transparent"} flex flex-col relative`}
             >
-              {i === 0 && <span className="absolute -top-3 right-6 bg-safety-orange text-white text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Most Popular</span>}
+              {i === 0 && <span className="absolute -top-3 right-6 bg-safety-orange text-white text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest z-10">Most Popular</span>}
+              
+              {p.image && (
+                <div className="mb-6 -mx-8 -mt-8 overflow-hidden rounded-t-lg h-48 bg-gray-50">
+                  <img 
+                    src={p.image} 
+                    alt={p.name} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              )}
+
               <div className="mb-8">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-navy-deep/40">{p.best}</p>
                 <h3 className="text-xl font-bold mt-2">{p.name}</h3>
