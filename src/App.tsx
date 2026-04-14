@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
   Shield, 
   Eye, 
@@ -27,6 +27,7 @@ import {
   Phone
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { FOOTER_CONTENT } from "./content";
 
 // --- Components ---
 
@@ -40,6 +41,58 @@ const Logo = ({ light = false }: { light?: boolean }) => (
     />
   </div>
 );
+
+const PageModal = ({ isOpen, onClose, pageId }: { isOpen: boolean, onClose: () => void, pageId: string | null }) => {
+  if (!pageId || !FOOTER_CONTENT[pageId as keyof typeof FOOTER_CONTENT]) return null;
+  
+  const page = FOOTER_CONTENT[pageId as keyof typeof FOOTER_CONTENT];
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-navy-deep/60 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden"
+          >
+            <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-warm-bg-start">
+              <h2 className="text-2xl font-bold text-navy-deep">{page.title}</h2>
+              <button 
+                onClick={onClose}
+                className="p-2 hover:bg-navy-deep/5 rounded-full transition-colors"
+              >
+                <X size={24} className="text-navy-deep" />
+              </button>
+            </div>
+            <div className="p-8 max-h-[70vh] overflow-y-auto">
+              <div 
+                className="prose prose-navy max-w-none"
+                dangerouslySetInnerHTML={{ __html: page.content }}
+              />
+            </div>
+            <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
+              <button 
+                onClick={onClose}
+                className="px-6 py-2 bg-navy-deep text-white rounded-md font-bold text-sm hover:bg-navy-deep/90 transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -558,7 +611,7 @@ const GiftSection = () => {
   );
 };
 
-const Footer = () => {
+const Footer = ({ onOpenPage }: { onOpenPage: (id: string) => void }) => {
   return (
     <footer className="bg-navy-deep text-white border-t-2 border-safety-orange relative overflow-hidden">
       {/* Background Gradient for Depth */}
@@ -583,10 +636,10 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-sm font-bold uppercase tracking-widest text-white">Products</h4>
             <ul className="space-y-3 text-sm text-white/60">
-              <li><a href="#" className="hover:text-safety-orange transition-colors">DriveGuard</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">RoadGuard Pro</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">EV Battery Intelligence Kit</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Accessories</a></li>
+              <li><button onClick={() => onOpenPage('driveguard')} className="hover:text-safety-orange transition-colors">DriveGuard</button></li>
+              <li><button onClick={() => onOpenPage('roadguard-pro')} className="hover:text-safety-orange transition-colors">RoadGuard Pro</button></li>
+              <li><button onClick={() => onOpenPage('ev-battery-intelligence')} className="hover:text-safety-orange transition-colors text-left">EV Battery Intelligence Kit</button></li>
+              <li><button onClick={() => onOpenPage('accessories')} className="hover:text-safety-orange transition-colors">Accessories</button></li>
             </ul>
           </div>
 
@@ -594,11 +647,11 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-sm font-bold uppercase tracking-widest text-white">Support</h4>
             <ul className="space-y-3 text-sm text-white/60">
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Installation Guide</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Warranty</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Shipping & Returns</a></li>
+              <li><button onClick={() => onOpenPage('help-center')} className="hover:text-safety-orange transition-colors">Help Center</button></li>
+              <li><button onClick={() => onOpenPage('installation-guide')} className="hover:text-safety-orange transition-colors">Installation Guide</button></li>
+              <li><button onClick={() => onOpenPage('warranty')} className="hover:text-safety-orange transition-colors">Warranty</button></li>
+              <li><button onClick={() => onOpenPage('contact-us')} className="hover:text-safety-orange transition-colors">Contact Us</button></li>
+              <li><button onClick={() => onOpenPage('shipping-returns')} className="hover:text-safety-orange transition-colors">Shipping & Returns</button></li>
             </ul>
           </div>
 
@@ -606,11 +659,11 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-sm font-bold uppercase tracking-widest text-white">Company</h4>
             <ul className="space-y-3 text-sm text-white/60">
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Our Story</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Safety Board</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Press</a></li>
-              <li><a href="#" className="hover:text-safety-orange transition-colors">Canadian Standards</a></li>
+              <li><button onClick={() => onOpenPage('our-story')} className="hover:text-safety-orange transition-colors text-left">Our Story</button></li>
+              <li><button onClick={() => onOpenPage('safety-board')} className="hover:text-safety-orange transition-colors text-left">Safety Board</button></li>
+              <li><button onClick={() => onOpenPage('careers')} className="hover:text-safety-orange transition-colors text-left">Careers</button></li>
+              <li><button onClick={() => onOpenPage('press')} className="hover:text-safety-orange transition-colors text-left">Press</button></li>
+              <li><button onClick={() => onOpenPage('canadian-standards')} className="hover:text-safety-orange transition-colors text-left">Canadian Standards</button></li>
             </ul>
           </div>
         </div>
@@ -652,9 +705,9 @@ const Footer = () => {
               © 2026 Astrateq Gadgets. All rights reserved. Built for Canadian Roads.
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-[10px] font-bold text-white/40 uppercase tracking-widest">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Accessibility</a>
+              <button onClick={() => onOpenPage('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
+              <button onClick={() => onOpenPage('terms-of-service')} className="hover:text-white transition-colors">Terms of Service</button>
+              <button onClick={() => onOpenPage('accessibility')} className="hover:text-white transition-colors">Accessibility</button>
               <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded">
                 <span className="w-2 h-2 bg-red-500 rounded-full" />
                 <span>Made in Canada</span>
@@ -685,6 +738,8 @@ const Footer = () => {
 // --- Main App ---
 
 export default function App() {
+  const [activePage, setActivePage] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen selection:bg-safety-orange/30 selection:text-navy-deep">
       {/* Top Banner */}
@@ -742,7 +797,13 @@ export default function App() {
         </section>
       </main>
 
-      <Footer />
+      <Footer onOpenPage={(id) => setActivePage(id)} />
+
+      <PageModal 
+        isOpen={!!activePage} 
+        onClose={() => setActivePage(null)} 
+        pageId={activePage} 
+      />
     </div>
   );
 }
