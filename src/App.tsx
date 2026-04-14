@@ -560,49 +560,122 @@ const GiftSection = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-navy-deep text-white py-12 px-6">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-[1.5fr_repeat(4,1fr)] gap-12">
-        <div className="space-y-6">
-          <Logo light />
-          <p className="text-white/60 text-[10px] leading-relaxed">
-            Protecting Canadian families through AI innovation. Proudly headquartered in Toronto.
-          </p>
+    <footer className="bg-navy-deep text-white border-t-2 border-safety-orange relative overflow-hidden">
+      {/* Background Gradient for Depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep to-[#051525] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          {/* Column 1: Logo & Brand Info */}
+          <div className="lg:col-span-2 space-y-6">
+            <Logo light />
+            <div className="space-y-4">
+              <p className="text-lg font-bold text-white/90 leading-tight">
+                AI-Powered Automotive Safety for Canadian Families
+              </p>
+              <p className="text-sm text-white/60 leading-relaxed max-w-sm">
+                Premium AI safety devices designed in Canada for families with aging parents. Built with 94% predictive accuracy and Canadian winter conditions in mind.
+              </p>
+            </div>
+          </div>
+
+          {/* Column 2: Products */}
+          <div className="space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Products</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li><a href="#" className="hover:text-safety-orange transition-colors">DriveGuard</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">RoadGuard Pro</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">EV Battery Intelligence Kit</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Accessories</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Support */}
+          <div className="space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Support</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Help Center</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Installation Guide</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Warranty</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Contact Us</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Shipping & Returns</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Company */}
+          <div className="space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Company</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Our Story</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Safety Board</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Careers</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Press</a></li>
+              <li><a href="#" className="hover:text-safety-orange transition-colors">Canadian Standards</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div className="space-y-4">
-          <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-50">Products</h5>
-          <ul className="space-y-2 text-[10px] text-white/80">
-            <li><a href="#" className="hover:text-safety-orange transition-colors">DriveGuard</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">RoadGuard Pro</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">EV Kits</a></li>
-          </ul>
+        {/* Column 5: Connect / Social & Newsletter */}
+        <div className="mt-16 pt-16 border-t border-white/5 grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Connect</h4>
+            <div className="flex gap-4">
+              {[Twitter, Linkedin, Facebook, Instagram].map((Icon, i) => (
+                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safety-orange transition-all group">
+                  <Icon size={18} className="text-white group-hover:scale-110 transition-transform" />
+                </a>
+              ))}
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <p className="text-sm font-bold text-white/90">Join the Family Safety Waitlist</p>
+            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                className="flex-1 bg-white/5 border border-white/10 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-safety-orange/50 transition-all"
+              />
+              <button className="bg-safety-orange hover:bg-safety-orange/90 text-white px-6 py-2 rounded-md text-sm font-bold transition-all uppercase tracking-wider">
+                Join
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
 
-        <div className="space-y-4">
-          <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-50">Support</h5>
-          <ul className="space-y-2 text-[10px] text-white/80">
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Help Center</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Installation</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Warranty</a></li>
-          </ul>
-        </div>
+      {/* Sub-footer Bar */}
+      <div className="bg-[#051525] py-8 px-6 border-t border-white/5 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+            <div className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
+              © 2026 Astrateq Gadgets. All rights reserved. Built for Canadian Roads.
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 text-[10px] font-bold text-white/40 uppercase tracking-widest">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors">Accessibility</a>
+              <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded">
+                <span className="w-2 h-2 bg-red-500 rounded-full" />
+                <span>Made in Canada</span>
+              </div>
+            </div>
+          </div>
 
-        <div className="space-y-4">
-          <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-50">Company</h5>
-          <ul className="space-y-2 text-[10px] text-white/80">
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Our Story</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Safety Board</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Careers</a></li>
-          </ul>
-        </div>
-
-        <div className="space-y-4">
-          <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-50">Connect</h5>
-          <ul className="space-y-2 text-[10px] text-white/80">
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Twitter</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">LinkedIn</a></li>
-            <li><a href="#" className="hover:text-safety-orange transition-colors">Facebook</a></li>
-          </ul>
+          <div className="flex flex-wrap justify-center gap-8 py-4 border-t border-white/5">
+            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
+              <CheckCircle2 size={14} className="text-safety-orange" />
+              94% Predictive Accuracy
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
+              <Car size={14} className="text-safety-orange" />
+              OBD-II Plug & Play
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
+              <MapPin size={14} className="text-safety-orange" />
+              Designed for Canadian Winters
+            </div>
+          </div>
         </div>
       </div>
     </footer>
