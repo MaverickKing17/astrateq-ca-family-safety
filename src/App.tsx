@@ -30,6 +30,17 @@ import { useState, useEffect } from "react";
 
 // --- Components ---
 
+const Logo = ({ light = false }: { light?: boolean }) => (
+  <div className="flex items-center gap-2 group cursor-pointer">
+    <img 
+      src="https://i.ibb.co/20m1hyy8/Astrateq-Gadgets-Logo.png" 
+      alt="Astrateq Gadgets" 
+      className={`h-10 w-auto ${light ? "brightness-0 invert" : ""}`}
+      referrerPolicy="no-referrer"
+    />
+  </div>
+);
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,10 +54,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-safety-orange rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
-          <span className="text-xl font-display font-bold tracking-tight text-navy-deep">ASTRATEQ <span className="text-xs block -mt-1 font-normal tracking-widest opacity-60">GADGETS</span></span>
-        </div>
+        <Logo />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
@@ -88,95 +96,6 @@ const Navbar = () => {
         </motion.div>
       )}
     </nav>
-  );
-};
-
-const DashboardMockup = () => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.4 }}
-      className="relative w-full max-w-md mx-auto"
-    >
-      <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
-        <div className="bg-navy-deep p-4 flex items-center justify-between text-white">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-[10px] font-bold tracking-widest uppercase opacity-80">ASTRATEQ GUARDIAN</span>
-          </div>
-          <span className="text-[10px] font-bold bg-white/10 px-2 py-1 rounded">ACTIVE</span>
-        </div>
-        
-        <div className="p-6 space-y-6">
-          <div className="flex justify-between items-end">
-            <div>
-              <h4 className="text-xs font-bold text-navy-deep/40 uppercase tracking-wider">Pulse Dashboard</h4>
-              <p className="text-2xl font-display font-bold text-navy-deep">Dad's Drive</p>
-            </div>
-            <div className="text-right">
-              <p className="text-[10px] font-bold text-green-500 uppercase">Safe Zone</p>
-              <p className="text-xs font-bold text-navy-deep/60">Toronto, ON</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-warm-bg-start p-4 rounded-2xl border border-gray-100">
-              <p className="text-[10px] font-bold text-navy-deep/40 uppercase mb-1">Road Risk Score</p>
-              <p className="text-3xl font-display font-bold text-navy-deep">12</p>
-              <p className="text-[10px] font-bold text-green-500 mt-1">LOW • All clear</p>
-            </div>
-            <div className="bg-warm-bg-start p-4 rounded-2xl border border-gray-100">
-              <p className="text-[10px] font-bold text-navy-deep/40 uppercase mb-1">Next Service Flag</p>
-              <p className="text-3xl font-display font-bold text-navy-deep">41d</p>
-              <p className="text-[10px] font-bold text-orange-500 mt-1">Brake fluid variance</p>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Shield size={16} /></div>
-                <span className="text-xs font-bold text-navy-deep">Fatigue Index</span>
-              </div>
-              <span className="text-xs font-bold text-green-500">Normal</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-teal-50 text-teal-subtle rounded-lg"><Eye size={16} /></div>
-                <span className="text-xs font-bold text-navy-deep">AI Confidence</span>
-              </div>
-              <span className="text-xs font-bold text-navy-deep">94%</span>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-gray-100">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold text-navy-deep/40 uppercase">Overall Risk</span>
-              <span className="text-[10px] font-bold text-navy-deep">12 / 100</span>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-green-500 w-[12%]" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Badges */}
-      <motion.div 
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-6 top-1/4 bg-white p-3 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3"
-      >
-        <div className="w-10 h-10 bg-teal-subtle/10 text-teal-subtle rounded-full flex items-center justify-center">
-          <CheckCircle2 size={20} />
-        </div>
-        <div>
-          <p className="text-[10px] font-bold text-navy-deep/40 uppercase">Family View</p>
-          <p className="text-xs font-bold text-navy-deep">Connected</p>
-        </div>
-      </motion.div>
-    </motion.div>
   );
 };
 
@@ -223,7 +142,49 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        <DashboardMockup />
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative"
+        >
+          <div className="relative rounded-2xl overflow-hidden shadow-card border border-gray-100 bg-white p-2">
+            <img 
+              src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=1000" 
+              alt="Modern Automotive Safety Interface" 
+              className="w-full h-[400px] object-cover rounded-xl"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/40 to-transparent pointer-events-none" />
+            
+            {/* Floating UI Element to reinforce the "Gadget" feel */}
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-safety-orange/10 text-safety-orange rounded-full flex items-center justify-center">
+                    <Shield size={20} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-navy-deep/40 uppercase">Guardian Mode</p>
+                    <p className="text-xs font-bold text-navy-deep">Active Protection</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] font-bold text-teal-subtle uppercase">Accuracy</p>
+                  <p className="text-xs font-bold text-navy-deep">94.2%</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-safety-orange/10 rounded-full blur-2xl" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-teal-subtle/10 rounded-full blur-3xl" />
+        </motion.div>
       </div>
     </section>
   );
@@ -602,10 +563,7 @@ const Footer = () => {
     <footer className="bg-navy-deep text-white py-12 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-[1.5fr_repeat(4,1fr)] gap-12">
         <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-safety-orange rounded-md flex items-center justify-center text-white font-bold text-xl">A</div>
-            <span className="text-xl font-bold tracking-tight">ASTRATEQ GADGETS</span>
-          </div>
+          <Logo light />
           <p className="text-white/60 text-[10px] leading-relaxed">
             Protecting Canadian families through AI innovation. Proudly headquartered in Toronto.
           </p>
@@ -712,15 +670,6 @@ export default function App() {
       </main>
 
       <Footer />
-
-      {/* Floating Action Buttons (Fixed Right) */}
-      <div className="fixed right-6 bottom-1/2 translate-y-1/2 z-40 hidden lg:flex flex-col gap-3">
-        {[1,2,3,4].map(i => (
-          <button key={i} className="w-10 h-10 bg-white shadow-lg border border-gray-100 rounded-full flex items-center justify-center text-navy-deep hover:bg-safety-orange hover:text-white transition-all">
-            <span className="text-[10px] font-bold">{i}</span>
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
