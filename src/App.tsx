@@ -369,7 +369,7 @@ const Pricing = () => {
       price: "329", 
       tag: "MOST POPULAR", 
       best: "BEST FOR: FAMILIES WITH AGING PARENTS",
-      image: "https://i.ibb.co/M56sVkSh/Image-fx-5.jpg",
+      image: "https://i.ibb.co/Pst0X3nh/A-high-end-professional-202604141905.jpg",
       features: ["Real-time driving behaviour analysis", "Predictive maintenance alerts 3-6 weeks ahead", "Guardian Mode with family dashboard", "OBD-II plug-and-play • 5 min setup"]
     },
     { 
@@ -377,7 +377,7 @@ const Pricing = () => {
       price: "449", 
       tag: "ADVANCED", 
       best: "BEST FOR: FREQUENT DRIVERS & FLEET MANAGERS",
-      image: "https://i.ibb.co/mrmB1j6h/Generate-one-single-202604141834-1.jpg",
+      image: "https://i.ibb.co/gMpFh71P/A-cinematic-lifestyle-202604141916.jpg",
       features: ["Fleet-wide predictive maintenance", "Multi-vehicle Guardian Mode", "Driver fatigue detection", "Priority support access"]
     },
     { 
@@ -385,7 +385,7 @@ const Pricing = () => {
       price: "379", 
       tag: "BEST FOR: ELECTRIC VEHICLE OWNERS", 
       best: "BEST FOR: ELECTRIC VEHICLE OWNERS",
-      image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1000",
+      image: "https://i.ibb.co/svJmkPjL/Create-one-single-202604141855.jpg",
       features: ["Battery degradation forecasting", "Range anxiety early alerts", "OBD-II + EV API sync", "Charge cycle optimisation"]
     },
   ];
