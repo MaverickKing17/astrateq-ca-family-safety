@@ -377,7 +377,7 @@ const Pricing = () => {
       price: "449", 
       tag: "ADVANCED", 
       best: "BEST FOR: FREQUENT DRIVERS & FLEET MANAGERS",
-      image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1000",
+      image: "https://i.ibb.co/mrmB1j6h/Generate-one-single-202604141834-1.jpg",
       features: ["Fleet-wide predictive maintenance", "Multi-vehicle Guardian Mode", "Driver fatigue detection", "Priority support access"]
     },
     { 
@@ -411,20 +411,22 @@ const Pricing = () => {
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`p-8 rounded-lg shadow-card border ${i === 0 ? "bg-white text-navy-deep border-safety-orange border-2" : "bg-white border-transparent"} flex flex-col relative`}
+              className={`p-8 rounded-lg shadow-card border ${i === 0 ? "bg-white text-navy-deep border-safety-orange border-2" : "bg-white border-transparent"} flex flex-col relative group cursor-pointer`}
             >
               {i === 0 && <span className="absolute -top-3 right-6 bg-safety-orange text-white text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest z-10">Most Popular</span>}
               
               {p.image && (
-                <div className="mb-6 -mx-8 -mt-8 overflow-hidden rounded-t-lg h-48 bg-gray-50">
+                <div className="mb-6 -mx-8 -mt-8 overflow-hidden rounded-t-lg h-48 bg-gray-50 relative">
                   <img 
                     src={p.image} 
                     alt={p.name} 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
+                  <div className="absolute inset-0 bg-navy-deep/0 group-hover:bg-navy-deep/10 transition-colors duration-500" />
                 </div>
               )}
 
