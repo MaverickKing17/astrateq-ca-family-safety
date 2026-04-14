@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  --color-safety-orange: #FF6200;
+  --color-navy-deep: #0A2540;
+  --color-teal-subtle: #00B4A8;
+  --color-warm-bg-start: #F8F7F4;
+  --color-warm-bg-end: #F1EDE6;
+  
+  --shadow-card: 0 10px 25px rgba(10, 37, 64, 0.08);
+}
+
+@layer base {
+  body {
+    @apply font-sans text-[#2D3136] antialiased;
+    background: linear-gradient(to bottom, var(--color-warm-bg-start), var(--color-warm-bg-end));
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold tracking-tight text-navy-deep;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
