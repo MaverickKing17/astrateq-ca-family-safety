@@ -633,122 +633,130 @@ const GiftSection = () => {
 
 const Footer = ({ onOpenPage }: { onOpenPage: (id: string) => void }) => {
   return (
-    <footer className="bg-navy-deep text-white border-t-2 border-safety-orange relative overflow-hidden">
-      {/* Background Gradient for Depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep to-[#051525] pointer-events-none" />
+    <footer className="bg-navy-deep text-white relative overflow-hidden">
+      {/* Subtle Grid Pattern for Technical Feel */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
       
-      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-          {/* Column 1: Logo & Brand Info */}
-          <div className="lg:col-span-2 space-y-6">
+      {/* Top Accent Gradient */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-safety-orange to-transparent opacity-50" />
+      
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Brand Column */}
+          <div className="lg:col-span-4 space-y-8">
             <Logo light />
-            <div className="space-y-4">
-              <p className="text-lg font-bold text-white/90 leading-tight">
-                AI-Powered Automotive Safety for Canadian Families
+            <div className="space-y-6">
+              <h4 className="text-xl font-display font-bold text-white leading-tight uppercase tracking-tight">
+                Predictive Safety.<br />
+                <span className="text-safety-orange">Canadian Reliability.</span>
+              </h4>
+              <p className="text-sm text-white/50 leading-relaxed max-w-sm font-medium">
+                Astrateq is pioneering AI-driven vehicle health monitoring. Designed in Canada to protect families across every province, from the Rockies to the Maritimes.
               </p>
-              <p className="text-sm text-white/60 leading-relaxed max-w-sm">
-                Premium AI safety devices designed in Canada for families with aging parents. Built with 94% predictive accuracy and Canadian winter conditions in mind.
-              </p>
-            </div>
-          </div>
-
-          {/* Column 2: Products */}
-          <div className="space-y-6">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Products</h4>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li><button onClick={() => onOpenPage('driveguard')} className="hover:text-safety-orange transition-colors">DriveGuard</button></li>
-              <li><button onClick={() => onOpenPage('roadguard-pro')} className="hover:text-safety-orange transition-colors">RoadGuard Pro</button></li>
-              <li><button onClick={() => onOpenPage('ev-battery-intelligence')} className="hover:text-safety-orange transition-colors text-left">EV Battery Intelligence Kit</button></li>
-              <li><button onClick={() => onOpenPage('accessories')} className="hover:text-safety-orange transition-colors">Accessories</button></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Support */}
-          <div className="space-y-6">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Support</h4>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li><button onClick={() => onOpenPage('help-center')} className="hover:text-safety-orange transition-colors">Help Center</button></li>
-              <li><button onClick={() => onOpenPage('installation-guide')} className="hover:text-safety-orange transition-colors">Installation Guide</button></li>
-              <li><button onClick={() => onOpenPage('warranty')} className="hover:text-safety-orange transition-colors">Warranty</button></li>
-              <li><button onClick={() => onOpenPage('contact-us')} className="hover:text-safety-orange transition-colors">Contact Us</button></li>
-              <li><button onClick={() => onOpenPage('shipping-returns')} className="hover:text-safety-orange transition-colors">Shipping & Returns</button></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Company */}
-          <div className="space-y-6">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Company</h4>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li><button onClick={() => onOpenPage('our-story')} className="hover:text-safety-orange transition-colors text-left">Our Story</button></li>
-              <li><button onClick={() => onOpenPage('safety-board')} className="hover:text-safety-orange transition-colors text-left">Safety Board</button></li>
-              <li><button onClick={() => onOpenPage('careers')} className="hover:text-safety-orange transition-colors text-left">Careers</button></li>
-              <li><button onClick={() => onOpenPage('press')} className="hover:text-safety-orange transition-colors text-left">Press</button></li>
-              <li><button onClick={() => onOpenPage('canadian-standards')} className="hover:text-safety-orange transition-colors text-left">Canadian Standards</button></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Column 5: Connect / Social & Newsletter */}
-        <div className="mt-16 pt-16 border-t border-white/5 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">Connect</h4>
-            <div className="flex gap-4">
-              {[Twitter, Linkedin, Facebook, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safety-orange transition-all group">
-                  <Icon size={18} className="text-white group-hover:scale-110 transition-transform" />
-                </a>
-              ))}
-            </div>
-          </div>
-          
-          <div className="space-y-4">
-            <p className="text-sm font-bold text-white/90">Join the Family Safety Waitlist</p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="flex-1 bg-white/5 border border-white/10 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-safety-orange/50 transition-all"
-              />
-              <button className="bg-safety-orange hover:bg-safety-orange/90 text-white px-6 py-2 rounded-md text-sm font-bold transition-all uppercase tracking-wider">
-                Join
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      {/* Sub-footer Bar */}
-      <div className="bg-[#051525] py-8 px-6 border-t border-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-            <div className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
-              © 2026 Astrateq Gadgets. All rights reserved. Built for Canadian Roads.
-            </div>
-            <div className="flex flex-wrap justify-center gap-6 text-[10px] font-bold text-white/40 uppercase tracking-widest">
-              <button onClick={() => onOpenPage('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
-              <button onClick={() => onOpenPage('terms-of-service')} className="hover:text-white transition-colors">Terms of Service</button>
-              <button onClick={() => onOpenPage('accessibility')} className="hover:text-white transition-colors">Accessibility</button>
-              <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded">
-                <span className="w-2 h-2 bg-red-500 rounded-full" />
-                <span>Made in Canada</span>
+              <div className="flex gap-4">
+                {[Twitter, Linkedin, Facebook, Instagram].map((Icon, i) => (
+                  <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-safety-orange hover:border-safety-orange transition-all duration-300 group">
+                    <Icon size={18} className="text-white/60 group-hover:text-white group-hover:scale-110 transition-all" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 py-4 border-t border-white/5">
-            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
-              <CheckCircle2 size={14} className="text-safety-orange" />
-              94% Predictive Accuracy
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
-              <Car size={14} className="text-safety-orange" />
-              OBD-II Plug & Play
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
-              <MapPin size={14} className="text-safety-orange" />
-              Designed for Canadian Winters
+          {/* Links Columns */}
+          <div className="lg:col-span-2 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-safety-orange">Products</h4>
+            <ul className="space-y-4">
+              {['DriveGuard', 'RoadGuard Pro', 'EV Battery Intelligence Kit', 'Accessories'].map((item) => (
+                <li key={item}>
+                  <button 
+                    onClick={() => onOpenPage(item.toLowerCase().replace(/\s+/g, '-'))} 
+                    className="text-xs font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-safety-orange">Support</h4>
+            <ul className="space-y-4">
+              {['Help Center', 'Installation Guide', 'Warranty', 'Contact Us', 'Shipping & Returns'].map((item) => (
+                <li key={item}>
+                  <button 
+                    onClick={() => onOpenPage(item.toLowerCase().replace(/\s+/g, '-'))} 
+                    className="text-xs font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter Column */}
+          <div className="lg:col-span-4 space-y-8">
+            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-safety-orange/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-safety-orange/20 transition-colors" />
+              
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-2">Join the Waitlist</h4>
+              <p className="text-xs text-white/40 mb-6 leading-relaxed">Get early access to founding member pricing and safety updates.</p>
+              
+              <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="w-full bg-navy-deep/50 border border-white/10 rounded-xl px-4 py-3 text-xs text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-safety-orange/50 transition-all"
+                />
+                <button className="w-full bg-safety-orange hover:bg-safety-orange/90 text-white py-3 rounded-xl text-[10px] font-bold transition-all uppercase tracking-[0.2em] shadow-lg shadow-safety-orange/20">
+                  Secure Your Spot
+                </button>
+              </form>
             </div>
           </div>
+        </div>
+
+        {/* Sub-footer */}
+        <div className="mt-24 pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
+              © 2026 Astrateq Gadgets • Built for Canadian Roads
+            </div>
+            <div className="flex gap-6">
+              {['Privacy Policy', 'Terms of Service', 'Accessibility'].map((item) => (
+                <button 
+                  key={item}
+                  onClick={() => onOpenPage(item.toLowerCase().replace(/\s+/g, '-'))} 
+                  className="text-[10px] font-bold text-white/20 hover:text-white transition-colors uppercase tracking-[0.2em]"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Proudly Canadian</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Technical Badges */}
+        <div className="mt-12 flex flex-wrap justify-center lg:justify-start gap-8 opacity-20">
+          {[
+            { icon: <Shield size={14} />, text: "94% Accuracy" },
+            { icon: <Car size={14} />, text: "OBD-II Universal" },
+            { icon: <MapPin size={14} />, text: "Winter Tested" }
+          ].map((badge, i) => (
+            <div key={i} className="flex items-center gap-2 text-[9px] font-bold text-white uppercase tracking-[0.3em]">
+              {badge.icon} {badge.text}
+            </div>
+          ))}
         </div>
       </div>
     </footer>
