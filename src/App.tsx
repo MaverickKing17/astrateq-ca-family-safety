@@ -248,30 +248,40 @@ const Hero = () => {
 
 const Features = () => {
   const features = [
-    { id: "01", title: "Proactive risk alerts", desc: "Detects mechanical and road risk patterns weeks before they surface. Your loved one gets a calm, helpful notification — not a frightening alarm. Early intervention, always.", icon: <Bell className="text-safety-orange" /> },
-    { id: "02", title: "Incident evidence mode", desc: "Automatic high-fidelity recording during critical events, providing peace of mind and clear documentation if the unexpected happens.", icon: <Shield className="text-teal-subtle" /> },
-    { id: "03", title: "Family notifications (opt-in)", desc: "Stay informed with gentle updates on vehicle health and safety scores. Respectful monitoring that preserves their independence.", icon: <Smartphone className="text-navy-deep" /> },
-    { id: "04", title: "Winter safety alerts", desc: "Specialized Canadian road condition monitoring. Real-time alerts for black ice, freezing rain, and extreme temperature impacts.", icon: <Battery className="text-blue-500" /> },
+    { id: "01", title: "Proactive risk alerts", desc: "Detects mechanical and road risk patterns weeks before they surface.", icon: <Bell size={18} /> },
+    { id: "02", title: "Incident evidence mode", desc: "Automatic high-fidelity recording during critical events.", icon: <Shield size={18} /> },
+    { id: "03", title: "Family notifications (opt-in)", desc: "Stay informed with gentle updates on vehicle health.", icon: <Smartphone size={18} /> },
+    { id: "04", title: "Winter safety alerts", desc: "Specialized Canadian road condition monitoring.", icon: <Battery size={18} /> },
   ];
 
   return (
-    <section id="how-it-works" className="py-24 px-6 bg-white/50">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <span className="text-[10px] font-bold tracking-widest uppercase text-safety-orange">Guardian Mode</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-navy-deep mt-4">
-            ALWAYS WATCHING.<br />
-            <span className="opacity-40 italic">Never intrusive.</span>
-          </h2>
-          <p className="text-navy-deep/60 mt-4 max-w-md">
+    <section id="how-it-works" className="py-24 px-6 bg-white relative overflow-hidden">
+      {/* Technical Grid Background */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-8">
+          <div className="max-w-xl">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-safety-orange mb-4 block">Guardian Mode</span>
+            <h2 className="text-5xl md:text-6xl font-display font-bold text-navy-deep leading-none uppercase">
+              ALWAYS WATCHING.<br />
+              <span className="opacity-20">Never intrusive.</span>
+            </h2>
+          </div>
+          <p className="text-navy-deep/40 text-sm max-w-xs md:text-right mt-auto">
             Four layers of protection — running silently, alerting only when it genuinely matters.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[1.2fr_0.8fr_1fr] gap-8 items-start">
-          <div className="space-y-4">
-            <span className="text-[10px] font-bold tracking-widest uppercase text-navy-deep mb-4 block">ALWAYS WATCHING. Never intrusive.</span>
-            <div className="grid grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          {/* Features Grid */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-[1px] flex-1 bg-navy-deep/10" />
+              <span className="text-[10px] font-bold tracking-widest uppercase text-navy-deep/40 whitespace-nowrap">Safety Layers</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {features.map((f, i) => (
                 <motion.div 
                   key={f.id}
@@ -279,35 +289,86 @@ const Features = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group p-4 bg-white rounded-lg border-l-3 border-teal-subtle shadow-card hover:shadow-md transition-all cursor-pointer"
+                  className="group p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:border-safety-orange/20 transition-all duration-500 cursor-pointer relative overflow-hidden"
                 >
-                  <h3 className="text-xs font-bold text-navy-deep mb-1">{f.title}</h3>
-                  <p className="text-[10px] text-navy-deep/60 leading-relaxed">{f.desc.split('.')[0]}.</p>
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-safety-orange/5 rounded-bl-3xl -mr-4 -mt-4 group-hover:bg-safety-orange/10 transition-colors" />
+                  <div className="text-safety-orange mb-4 opacity-40 group-hover:opacity-100 transition-opacity">{f.icon}</div>
+                  <h3 className="text-xs font-bold text-navy-deep mb-2 uppercase tracking-tight">{f.title}</h3>
+                  <p className="text-[10px] text-navy-deep/50 leading-relaxed">{f.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="bg-navy-deep rounded-lg p-8 text-white text-center shadow-card">
-            <span className="text-[10px] font-bold tracking-widest uppercase opacity-60 mb-4 block">System Integrity</span>
-            <h2 className="text-5xl font-bold text-safety-orange">94%</h2>
-            <p className="text-[10px] text-white/60 mt-4 leading-relaxed">
-              Industry leading AI hazard detection for rural & urban Canadian terrain.
-            </p>
+          {/* Central Stat - Technical Instrument Style */}
+          <div className="lg:col-span-3 flex flex-col">
+            <div className="flex-1 bg-navy-deep rounded-[2.5rem] p-8 text-white relative overflow-hidden flex flex-col justify-center items-center group">
+              {/* Animated scanning line */}
+              <motion.div 
+                animate={{ top: ['0%', '100%', '0%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute left-0 right-0 h-[1px] bg-safety-orange/30 z-10 pointer-events-none"
+              />
+              
+              <div className="relative z-20 text-center">
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/40 mb-8 block">System Integrity</span>
+                
+                <div className="relative inline-block">
+                  <h2 className="text-8xl font-display font-bold text-white tracking-tighter">94<span className="text-safety-orange">%</span></h2>
+                  <div className="absolute -inset-4 border border-white/5 rounded-full animate-spin-slow" />
+                </div>
+
+                <div className="mt-12 space-y-4">
+                  <p className="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
+                    Industry leading AI hazard detection for rural & urban Canadian terrain.
+                  </p>
+                  <div className="flex justify-center gap-1">
+                    {[1,2,3,4,5].map(i => (
+                      <div key={i} className={`w-1 h-4 rounded-full ${i < 5 ? 'bg-safety-orange' : 'bg-white/10'}`} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Background technical elements */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-white rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/50 rounded-full" />
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-4">
-            <span className="text-[10px] font-bold tracking-widest uppercase text-navy-deep mb-4 block">THREE STEPS. Five minutes.</span>
-            <div className="flex flex-col gap-3">
+          {/* Steps Grid */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-[10px] font-bold tracking-widest uppercase text-navy-deep/40 whitespace-nowrap">Installation</span>
+              <div className="h-[1px] flex-1 bg-navy-deep/10" />
+            </div>
+            <div className="space-y-4">
               {[
-                { title: "01. Order Kit", desc: "Shipped free across Canada." },
-                { title: "02. Plug & Play", desc: "Installs in seconds (OBD-II)." },
-                { title: "03. Rest Easy", desc: "24/7 peace of mind starts." }
+                { title: "Order Kit", desc: "Shipped free across Canada.", icon: <CheckCircle2 size={16} /> },
+                { title: "Plug & Play", desc: "Installs in seconds (OBD-II).", icon: <CheckCircle2 size={16} /> },
+                { title: "Rest Easy", desc: "24/7 peace of mind starts.", icon: <CheckCircle2 size={16} /> }
               ].map((step, i) => (
-                <div key={i} className="p-4 bg-white rounded-lg border-l-3 border-safety-orange shadow-card">
-                  <h4 className="text-xs font-bold text-navy-deep">{step.title}</h4>
-                  <p className="text-[10px] text-navy-deep/60">{step.desc}</p>
-                </div>
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-6 bg-gray-50 border border-transparent hover:border-navy-deep/10 rounded-2xl transition-all group flex items-center gap-6"
+                >
+                  <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-safety-orange font-mono text-xs font-bold">
+                    0{i+1}
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-navy-deep uppercase tracking-tight">{step.title}</h4>
+                    <p className="text-[10px] text-navy-deep/40 mt-1">{step.desc}</p>
+                  </div>
+                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-safety-orange">
+                    {step.icon}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -319,23 +380,35 @@ const Features = () => {
 
 const Benefits = () => {
   const benefits = [
-    { title: "Canadian winter conditions", desc: "Black ice, freezing rain, and reduced visibility demand more from every driver. Guardian Mode monitors conditions in real time.", icon: <MapPin className="text-blue-500" /> },
-    { title: "Proactive — not reactive", desc: "Most safety systems respond after something goes wrong. ASTRA-AI detects early warning signs weeks before they become incidents.", icon: <Clock className="text-safety-orange" /> },
-    { title: "Independence with a safety net", desc: "Your parent stays in full control of their car and their life. ASTRA-AI runs quietly in the background, alerting only when it matters.", icon: <Shield className="text-teal-subtle" /> },
+    { title: "Canadian winter conditions", desc: "Black ice, freezing rain, and reduced visibility demand more from every driver. Guardian Mode monitors conditions in real time.", icon: <MapPin size={24} /> },
+    { title: "Proactive — not reactive", desc: "Most safety systems respond after something goes wrong. ASTRA-AI detects early warning signs weeks before they become incidents.", icon: <Clock size={24} /> },
+    { title: "Independence with a safety net", desc: "Your parent stays in full control of their car and their life. ASTRA-AI runs quietly in the background, alerting only when it matters.", icon: <Shield size={24} /> },
   ];
 
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-end mb-16">
+    <section className="py-32 px-6 bg-warm-bg-start/30 relative overflow-hidden">
+      {/* Decorative background element */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/50 to-transparent pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-end mb-24">
           <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-navy-deep uppercase leading-[1.1]">
-              THEY DESERVE THEIR <span className="opacity-30">independence.</span><br />
-              YOU DESERVE <span className="text-safety-orange">PEACE OF MIND.</span>
+            <div className="w-12 h-1 bg-safety-orange mb-8" />
+            <h2 className="text-5xl md:text-7xl font-display font-bold text-navy-deep uppercase leading-[0.9] tracking-tighter">
+              THEY DESERVE THEIR<br />
+              <span className="text-safety-orange">INDEPENDENCE.</span><br />
+              <span className="opacity-20">YOU DESERVE</span><br />
+              PEACE OF MIND.
             </h2>
           </div>
-          <div className="text-right italic text-navy-deep/40 text-lg">
-            "If you can't be in the passenger seat,<br />be in the loop."
+          <div className="lg:text-right">
+            <p className="text-2xl font-display italic text-navy-deep/30 leading-tight max-w-md lg:ml-auto">
+              "If you can't be in the passenger seat, be in the loop."
+            </p>
+            <div className="mt-8 flex lg:justify-end gap-2">
+              <div className="w-2 h-2 rounded-full bg-safety-orange" />
+              <div className="w-8 h-2 rounded-full bg-navy-deep/10" />
+            </div>
           </div>
         </div>
 
@@ -343,17 +416,27 @@ const Benefits = () => {
           {benefits.map((b, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+              transition={{ delay: i * 0.1, duration: 0.8 }}
+              className="group p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden"
             >
-              <div className="w-12 h-12 bg-warm-bg-start rounded-2xl flex items-center justify-center mb-6">
+              {/* Subtle pattern background on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity pointer-events-none" 
+                   style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '24px 24px' }} />
+              
+              <div className="w-16 h-16 bg-gray-50 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-safety-orange group-hover:text-white transition-all duration-500 text-navy-deep/30">
                 {b.icon}
               </div>
-              <h3 className="text-xl font-bold text-navy-deep mb-4">{b.title}</h3>
-              <p className="text-navy-deep/60 leading-relaxed">{b.desc}</p>
+              
+              <h3 className="text-2xl font-bold text-navy-deep mb-6 leading-tight group-hover:text-safety-orange transition-colors">{b.title}</h3>
+              <p className="text-navy-deep/50 leading-relaxed font-medium">{b.desc}</p>
+              
+              <div className="mt-10 pt-10 border-t border-gray-50 flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-navy-deep/20">Core Benefit</span>
+                <ArrowRight size={16} className="text-safety-orange opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </div>
             </motion.div>
           ))}
         </div>
